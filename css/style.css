@@ -1,0 +1,322 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #F6F1EB;
+    --card: #FFFFFF;
+    --text: #2C2416;
+    --text-muted: #8A7D6B;
+    --accent: #C4653A;
+    --accent-light: #F5E6DE;
+    --border: #E4DDD4;
+    --result-bg: #2C2416;
+    --result-text: #F6F1EB;
+    --shadow: 0 1px 3px rgba(44, 36, 22, 0.06), 0 8px 24px rgba(44, 36, 22, 0.08);
+    --radius: 12px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.search-wrap {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+#ingredientInput {
+    width: 100%;
+    padding: 12px 38px 12px 42px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#ingredientInput:focus {
+    border-color: var(--accent);
+}
+
+.clear-btn {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.clear-btn:hover {
+    color: var(--text);
+}
+
+.clear-btn.visible {
+    display: block;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 32px rgba(44, 36, 22, 0.12);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+}
+
+.dropdown.open {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.12s;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+    background: var(--accent-light);
+}
+
+.dropdown-item mark {
+    background: none;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.amount-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0;
+}
+
+.amount-row>div {
+    flex: 1;
+}
+
+#amountInput {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+}
+
+#amountInput::-webkit-inner-spin-button,
+#amountInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+#amountInput:focus {
+    border-color: var(--accent);
+}
+
+#unitSelect {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238A7D6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    transition: border-color 0.2s;
+}
+
+#unitSelect:focus {
+    border-color: var(--accent);
+}
+
+/* Result */
+.result {
+    background: var(--result-bg);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    color: var(--result-text);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.result.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+    margin-bottom: 8px;
+}
+
+.result-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.result-value .unit {
+    font-size: 1.4rem;
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+.result-range {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    margin-top: 4px;
+}
+
+.result-ingredient {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(246, 241, 235, 0.1);
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.no-result {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+.source-link {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.source-link a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.source-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 32px 16px 60px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .result {
+        padding: 24px;
+    }
+
+    .result-value {
+        font-size: 2.2rem;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+}
