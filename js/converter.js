@@ -220,12 +220,12 @@ function calculate() {
   resultRange.textContent = rangeText;
   resultIngredient.textContent = `${amount} ${fromUnit}${amount !== 1 ? "s" : ""} of ${selected.ingredient}`;
   resultEl.classList.add("visible");
-  noResult.style.display = "none";
+  noResult.style.visibility = "hidden";
 }
 
 function hideResult() {
   resultEl.classList.remove("visible");
-  noResult.style.display = "block";
+  noResult.style.visibility = "visible";
   noResult.textContent = selected
     ? "Enter an amount"
     : "Select an ingredient to begin";
